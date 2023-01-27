@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".UI.HelpActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/backBtnImage"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_arrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="How to Play?"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Offline:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/helpText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="1. Start by selecting the difficulty level of the game (easy, medium, or advanced).\n\n
+2. Once the game has loaded, you will see the picture puzzle on the screen, divided into a number of different pieces.
+3. The objective of the game is to arrange the pieces in the correct order to complete the picture.\n\n
+4. To move a piece, simply tap and hold on the piece you wish to move, and then drag it to the desired location.\n\n
+5. Try to place the pieces in the correct location as quickly and efficiently as possible to achieve the highest score.\n\n
+6. If you get stuck and cannot figure out where a piece belongs, you can always hit the shuffle button to randomize the pieces and start over.\n\n
+7. Keep playing and trying different strategies to improve your high score and become a puzzle master!"/>
+
+            <TextView
+                android:layout_marginVertical="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/helpOnlineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="1. Start by opening the online picture puzzle game on your device and log in to your account or create a new one if you don't have one already.\n\n
+2. Once you are logged in, you will be prompted to enter a partner ID. This is the ID of the player you want to play with.\n\n
+3. After entering the partner ID, you will be taken to the game screen where you will see the picture puzzle.\n\n
+4. The goal of the game is to solve the puzzle as quickly as possible. To move a piece, simply tap and drag it to the desired location.\n\n
+5. As you move the pieces around, the game will keep track of your time and the number of moves you make.\n\n
+6. Once you have successfully completed the puzzle, the game will show you your final time and the number of moves it took you to solve it.\n\n
+7. The winner of the game is the player who solves the puzzle in the least amount of time and with the least number of moves.\n\n
+8. You can also play with different partner, and compare your score with them.\n\n
+9. You can also see your past score, and try to improve it."/>
+
+
+            <TextView
+                android:layout_marginVertical="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thank You :-)"
+                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>

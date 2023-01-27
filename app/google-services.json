@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "628018556539",
+    "firebase_url": "https://snapshot-scramble-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "snapshot-scramble",
+    "storage_bucket": "snapshot-scramble.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628018556539:android:6c8fee7b093d7a0161fcde",
+        "android_client_info": {
+          "package_name": "com.hashmac.snapshotscramble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628018556539-3t7nr4hma8epbhmq4mhq9us41qru4e4b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hashmac.snapshotscramble",
+            "certificate_hash": "29f43cc84c84c62e5d0ddfa2df4cb909f9461a06"
+          }
+        },
+        {
+          "client_id": "628018556539-ff1mi3g2jb9q5bg5chdhbcb7bb0q9f5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuIw26xxjjMUsnBpgvhEv9KNX1QkqCKXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628018556539-abqpa4u27tb3cqd8u35sqh4v2tu3e9m3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

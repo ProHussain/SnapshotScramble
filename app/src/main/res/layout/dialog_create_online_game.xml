@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginVertical="8dp"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:text="@string/your_game_id_is"/>
+
+    <TextView
+        android:id="@+id/tv_game_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginVertical="8dp"
+        android:textColor="@color/colorText"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:text="123431654"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/copy_id_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/copy"
+            android:textColor="@color/colorText"
+            android:background="@drawable/button_background"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:paddingHorizontal="16dp"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/share_id_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/colorText"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/button_background"
+            android:layout_marginVertical="8dp"
+            style="?android:attr/buttonBarButtonStyle" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/start_game_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_game"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/colorText"
+        android:layout_marginHorizontal="48dp"
+        android:background="@drawable/button_background"
+        android:layout_marginVertical="8dp"
+        style="?android:attr/buttonBarButtonStyle" />
+
+</LinearLayout>

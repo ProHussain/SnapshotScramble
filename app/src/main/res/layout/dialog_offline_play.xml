@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/resumeBtn"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:layout_marginHorizontal="48dp"
+        android:text="@string/resume"
+        android:textColor="@color/colorText"
+        android:layout_marginVertical="8dp"/>
+
+    <Button
+        android:id="@+id/newGameBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginVertical="8dp"
+        android:textColor="@color/colorText"
+        android:text="@string/start_a_new_game"/>
+
+    <Button
+        android:id="@+id/customImageBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_your_image"
+        android:textColor="@color/colorText"
+        android:background="@drawable/button_background"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginVertical="8dp"/>
+
+</LinearLayout>
