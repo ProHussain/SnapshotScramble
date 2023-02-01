@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private static final int GALLERY_REQUEST_CODE = 1;
     DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,16 +114,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void LeaderBoardScreen() {
-        startActivity(new Intent(MainActivity.this,LeaderBoardActivity.class));
+        startActivity(new Intent(MainActivity.this, LeaderBoardActivity.class));
     }
 
     private void HelpScreen() {
-        startActivity(new Intent(MainActivity.this,HelpActivity.class));
+        startActivity(new Intent(MainActivity.this, HelpActivity.class));
     }
 
     private void SettingScreen() {
-        startActivity(new Intent(MainActivity.this,SettingActivity.class));
+        startActivity(new Intent(MainActivity.this, SettingActivity.class));
     }
 
     private void ExitDialog() {
@@ -222,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dialog.dismiss();
                 String name = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName();
-                LiveGameModel model = new LiveGameModel(gameID,name,"","Waiting","");
+                LiveGameModel model = new LiveGameModel(gameID, name, "", "Waiting", "");
                 StartOnlineGame(model);
             }
         });
@@ -230,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void ShareGameID(String gameID) {
         String shareMessage = "Join me in solving challenging puzzles on the Puzzle game! Download the app now and let's play together! https://play.google.com/store/apps/details?id="
-                + this.getPackageName()+"\n\n\n Here is your Game ID: "+gameID;
+                + this.getPackageName() + "\n\n\n Here is your Game ID: " + gameID;
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
@@ -260,9 +262,11 @@ public class MainActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     LiveGameModel model = snapshot.getValue(LiveGameModel.class);
                     assert model != null;
-                    model.setUserTwo(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName());
-                    model.setStatus("Start");
-                    StartOnlineGame(model);
+                    if (model.getWinner().isEmpty()) {
+                        model.setUserTwo(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName());
+                        model.setStatus("Start");
+                        StartOnlineGame(model);
+                    }
                 } else {
                     Toast.makeText(MainActivity.this, "Please check your ID", Toast.LENGTH_SHORT).show();
                 }
@@ -319,14 +323,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void StartNewGame() {
-        Intent intent = new Intent(this,PlayGameActivity.class);
-        intent.putExtra("Game","new");
+        Intent intent = new Intent(this, PlayGameActivity.class);
+        intent.putExtra("Game", "new");
         startActivity(intent);
     }
 
     private void ResumeGame() {
-        Intent intent = new Intent(this,PlayGameActivity.class);
-        intent.putExtra("Game","resume");
+        Intent intent = new Intent(this, PlayGameActivity.class);
+        intent.putExtra("Game", "resume");
         startActivity(intent);
     }
 
@@ -335,11 +339,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                            Intent intent = new Intent(MainActivity.this,PlayGameActivity.class);
-                            intent.putExtra("Game","online");
-                            intent.putExtra("GameID",model.getGameID());
-                            startActivity(intent);
-                            finish();
+                    Intent intent = new Intent(MainActivity.this, PlayGameActivity.class);
+                    intent.putExtra("Game", "online");
+                    intent.putExtra("GameID", model.getGameID());
+                    Log.e("Game", "Start");
+                    startActivity(intent);
+                    finish();
                 } else {
                     Log.e(TAG, Objects.requireNonNull(task.getException()).getMessage());
                     Log.e(TAG, "Error there");
@@ -373,8 +378,8 @@ public class MainActivity extends AppCompatActivity {
                 Uri croppedImageUri = result.getUri();
                 try {
                     Config.puzzleImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedImageUri);
-                    Intent intent = new Intent(this,PlayGameActivity.class);
-                    intent.putExtra("Game","custom");
+                    Intent intent = new Intent(this, PlayGameActivity.class);
+                    intent.putExtra("Game", "custom");
                     startActivity(intent);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

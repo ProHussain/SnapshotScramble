@@ -105,27 +105,29 @@ public class PlayGameActivity extends AppCompatActivity implements View.OnTouchL
         numberOfRows = 3;
         String gameID = getIntent().getStringExtra("GameID");
         reference = FirebaseDatabase.getInstance().getReference();
+        AlertDialog.Builder builder = new AlertDialog.Builder(PlayGameActivity.this);
+        builder.setTitle(getString(R.string.app_name));
+        builder.setMessage("Please wait while other player join table");
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
         reference.child("Live").child(gameID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PlayGameActivity.this);
-                    builder.setTitle(getString(R.string.app_name));
-                    builder.setMessage("Please wait while other player join table");
-                    AlertDialog dialog = builder.create();
-                    dialog.setCancelable(false);
-
                     gameModel = snapshot.getValue(LiveGameModel.class);
                     assert gameModel != null;
                     switch (gameModel.getStatus()) {
                         case "Start":
                             dialog.dismiss();
+                            Log.e("Game","Start");
                             StartOnlineGame();
                             break;
                         case "Completed":
+                            Log.e("Game","Complete");
                             ShowOnlineWinDialog();
                             break;
                         case "Waiting":
+                            Log.e("Game","Wait");
                             dialog.show();
                             break;
                     }
@@ -158,6 +160,7 @@ public class PlayGameActivity extends AppCompatActivity implements View.OnTouchL
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
+                Log.e("Game","Quit");
                 startActivity(new Intent(PlayGameActivity.this,MainActivity.class));
                 finish();
             }
