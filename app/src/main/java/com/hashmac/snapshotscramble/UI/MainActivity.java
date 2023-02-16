@@ -1,20 +1,21 @@
 package com.hashmac.snapshotscramble.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,15 +26,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hashmac.snapshotscramble.Model.LiveGameModel;
+import com.hashmac.snapshotscramble.Utils.Config;
 import com.hashmac.snapshotscramble.databinding.ActivityMainBinding;
 import com.hashmac.snapshotscramble.databinding.DialogCreateOnlineGameBinding;
 import com.hashmac.snapshotscramble.databinding.DialogGamePlayBinding;
 import com.hashmac.snapshotscramble.databinding.DialogJoinAGameBinding;
 import com.hashmac.snapshotscramble.databinding.DialogOfflinePlayBinding;
-import com.hashmac.snapshotscramble.Utils.Config;
 import com.hashmac.snapshotscramble.databinding.DialogOnlinePlayBinding;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -53,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        if (!OpenCVLoader.initDebug()) {
+            Log.e("OpenCV", "Unable to load OpenCV");
+        } else {
+            Log.d("OpenCV", "OpenCV loaded");
+        }
+
         if (Config.UPDATE_AVAILABLE) {
             showUpdateDialog("v2.1");
         }
@@ -377,8 +391,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Uri croppedImageUri = result.getUri();
                 try {
-                    Config.puzzleImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedImageUri);
-                    Intent intent = new Intent(this, PlayGameActivity.class);
+                    Bitmap image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedImageUri);
+                    Config.puzzleImage = convertToCartoonFilter(image,7, 9, 9, 7, 7, 9);
+                    Intent intent = new Intent(MainActivity.this, PlayGameActivity.class);
                     intent.putExtra("Game", "custom");
                     startActivity(intent);
                 } catch (IOException e) {
@@ -388,4 +403,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private Bitmap convertToCartoonFilter(Bitmap origBitmapImage, int numBilateral, int bDiameter, double sigmaColor, double sigmaSpace, int mDiameter, int eDiameter) {
+        Mat imgMat = new Mat(origBitmapImage.getHeight(), origBitmapImage.getWidth(), CvType.CV_8UC3);
+        Mat tempMat1 = new Mat(origBitmapImage.getHeight(), origBitmapImage.getWidth(), CvType.CV_8UC3);
+        Mat tempMat2 = new Mat(origBitmapImage.getHeight(), origBitmapImage.getWidth(), CvType.CV_8UC3);
+
+        Utils.bitmapToMat(origBitmapImage, imgMat);
+
+        imgMat.copyTo(tempMat1);
+        imgMat.copyTo(tempMat2);
+        Imgproc.cvtColor(tempMat1, tempMat1, Imgproc.COLOR_BGRA2RGB); //tempMat1 RGB
+        Imgproc.cvtColor(tempMat2, tempMat2, Imgproc.COLOR_BGRA2RGB); //tempMat2 RGB
+        for(int i=0; i < 2; i++) {
+            Imgproc.pyrDown(tempMat1, tempMat1);
+        }
+        for(int i=0; i < numBilateral; i++) {
+            Imgproc.bilateralFilter(tempMat1, tempMat2, bDiameter, sigmaColor, sigmaSpace);
+            System.gc();
+            tempMat2.copyTo(tempMat1);
+        }
+        for(int i=0; i < 2; i++) {
+            Imgproc.pyrUp(tempMat1, tempMat1);
+        }
+        Imgproc.resize(tempMat1, tempMat1, imgMat.size());
+        Imgproc.cvtColor(tempMat2, tempMat2, Imgproc.COLOR_RGB2GRAY);
+        Imgproc.cvtColor(imgMat, tempMat2, Imgproc.COLOR_RGB2GRAY); //tempMat2 Gray
+        Imgproc.cvtColor(imgMat, imgMat, Imgproc.COLOR_RGB2GRAY);
+        Imgproc.medianBlur(tempMat2, imgMat, mDiameter); //
+
+        Imgproc.adaptiveThreshold(imgMat, tempMat2, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, eDiameter, 2);
+        Imgproc.cvtColor(tempMat2, tempMat2, Imgproc.COLOR_GRAY2RGB);
+        Imgproc.cvtColor(imgMat, imgMat, Imgproc.COLOR_GRAY2RGB);
+        Core.bitwise_and(tempMat1, tempMat2, imgMat);
+        Imgproc.cvtColor(imgMat, imgMat, Imgproc.COLOR_RGB2BGRA);
+        Utils.matToBitmap(imgMat, origBitmapImage);
+        Bitmap finalBitmapImage = origBitmapImage.copy(origBitmapImage.getConfig(), true);
+        imgMat.release();
+        tempMat1.release();
+        tempMat2.release();
+        return finalBitmapImage;
+    }
 }

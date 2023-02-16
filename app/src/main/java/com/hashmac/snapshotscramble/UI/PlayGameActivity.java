@@ -181,6 +181,7 @@ public class PlayGameActivity extends AppCompatActivity implements View.OnTouchL
     }
 
     private void StartNewGame(Bitmap image) {
+        binding.orignalImage.setImageBitmap(image);
         deviceDimension = DeviceProperty.getDeviceDimension(PlayGameActivity.this);
         boardWidth = deviceDimension.x - 2*PUZZLE_BOARD_LEFT_MARGIN;
         boardHeight = deviceDimension.y - 2*PUZZLE_BOARD_LEFT_MARGIN;
