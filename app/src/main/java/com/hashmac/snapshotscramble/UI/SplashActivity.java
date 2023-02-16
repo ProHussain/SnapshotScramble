@@ -18,6 +18,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.hashmac.snapshotscramble.Utils.Config;
 import com.hashmac.snapshotscramble.databinding.ActivitySplashBinding;
 
+import org.opencv.android.InstallCallbackInterface;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
@@ -68,4 +72,5 @@ public class SplashActivity extends AppCompatActivity {
         mHandler.postDelayed(mProgressRunnable, PROGRESS_INTERVAL);
 
     }
+
 }
