@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_level_name" />
 
         <FrameLayout
-            android:id="@+id/fl_level_status"
+            android:id="@+id/flLevelStatus"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/transperentBG"

@@ -8,28 +8,8 @@
     </style>
 
     <!-- Styles for the puzzle grid -->
-    <style name="PuzzleGridStyle" parent="AppTheme">
-        <item name="android:numColumns">3</item>
-        <item name="android:verticalSpacing">8dp</item>
-        <item name="android:horizontalSpacing">8dp</item>
-        <item name="android:stretchMode">columnWidth</item>
-        <item name="android:gravity">center</item>
-    </style>
 
     <!-- Style for puzzle pieces -->
-    <style name="PuzzlePieceStyle" parent="AppTheme">
-        <item name="android:layout_width">96dp</item>
-        <item name="android:layout_height">96dp</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:background">@color/colorAccent</item>
-    </style>
 
     <!-- Style for the shuffle button -->
-    <style name="ShuffleButtonStyle" parent="AppTheme">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-    </style>
 </resources>

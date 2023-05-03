@@ -1,0 +1,8 @@
+
+k	java:S116"QRename this field "GameID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ר‚מתÿÿÿÿ
+l	java:S116"RRename this field "UserOne" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ר‚מתÿÿÿÿ
+l	java:S116"RRename this field "UserTwo" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ר‚מתÿÿÿÿ
+k	java:S116"QRename this field "Status" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ר‚מתÿÿÿÿ
+k	java:S116"QRename this field "Winner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ר‚מתÿÿÿÿ
+_
+java:S1659"DDeclare "UserOne" and all following declarations on a separate line.(«ר‚מתÿÿÿÿ

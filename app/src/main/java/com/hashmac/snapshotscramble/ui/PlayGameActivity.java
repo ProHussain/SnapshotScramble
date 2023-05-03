@@ -1,11 +1,15 @@
 package com.hashmac.snapshotscramble.ui;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,19 +20,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hashmac.snapshotscramble.PuzzleUtills.BitmapSplitter;
-import com.hashmac.snapshotscramble.PuzzleUtills.DeviceProperty;
-import com.hashmac.snapshotscramble.PuzzleUtills.Position;
-import com.hashmac.snapshotscramble.PuzzleUtills.TileItem;
+import com.hashmac.snapshotscramble.models.LeaderBoard;
+import com.hashmac.snapshotscramble.puzzle.BitmapSplitter;
+import com.hashmac.snapshotscramble.puzzle.DeviceProperty;
+import com.hashmac.snapshotscramble.puzzle.Position;
+import com.hashmac.snapshotscramble.puzzle.TileItem;
 import com.hashmac.snapshotscramble.R;
-import com.hashmac.snapshotscramble.Utils.Config;
-import com.hashmac.snapshotscramble.Utils.PuzzlePreference;
+import com.hashmac.snapshotscramble.utils.Config;
+import com.hashmac.snapshotscramble.utils.PuzzlePreference;
 import com.hashmac.snapshotscramble.databinding.ActivityPlayGameBinding;
 import com.hashmac.snapshotscramble.models.GameLevel;
 import com.hashmac.snapshotscramble.models.LiveGameModel;
@@ -55,7 +62,6 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
     public static int numberOfRows = 4;
     public static int PUZZLE_BOARD_LEFT_MARGIN = 20;
     private int tileSize;
-    private int stepCount = 0;
     PuzzlePreference puzzlePreference;
     String game;
     CountDownTimer timer;
@@ -63,6 +69,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
     private int targetMoves;
     private int remainingTime;
     boolean gamePaused = false;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,9 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         binding = ActivityPlayGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         puzzlePreference = new PuzzlePreference(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        }
         game = getIntent().getStringExtra("Game");
         init();
         binding.btnPause.setOnClickListener(view -> showPauseDialog());
@@ -82,6 +92,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         if (timer != null) {
             timer.cancel();
         }
+        Config.stopMusic(this);
     }
 
     @Override
@@ -90,6 +101,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         if (game.equals("level") && gamePaused) {
             showPauseDialog();
         }
+        Config.checkMusic(this);
     }
 
     @Override
@@ -155,6 +167,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
     }
 
     private void startCounter(int target) {
+        target = 5;
         binding.gameType.setText("Time : ");
         timer = new CountDownTimer(target * 1000L, 1000) {
             @Override
@@ -172,6 +185,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
     }
 
     private void showGameOverDialog(String message) {
+        checkVibration();
         new AwesomeInfoDialog(PlayGameActivity.this)
                 .setDialogIconOnly(R.drawable.dislike)
                 .setColoredCircle(R.color.colorBackground)
@@ -217,6 +231,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
                         } else if (gameModel.getUserTwo().isEmpty()) {
                             dialog.show();
                         } else {
+                            checkVibration();
                             dialog.hide();
                             startOnlineGame();
                         }
@@ -232,6 +247,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
     }
 
     private void showOnlineWinDialog() {
+        checkVibration();
         String winMessage;
         if (gameModel.getWinner().equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName())) {
             winMessage = "Congratulations," + gameModel.getWinner() + "won the game!";
@@ -368,6 +384,8 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
                     bringTileToOriginalPosition(selectedTile);
                 }
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + event.getActionMasked());
         }
         return true;
     }
@@ -400,7 +418,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
 
         if (isGameComplete()) {
             if (game.equals("online")) {
-                FinishOnlineGame();
+                finishOnlineGame();
             } else {
                 finishOfflineGame();
             }
@@ -412,7 +430,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         binding.gameTarget.setText(String.valueOf(targetMoves));
     }
 
-    private void FinishOnlineGame() {
+    private void finishOnlineGame() {
         gameModel.setWinner(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName());
         gameModel.setStatus("Completed");
         reference.child("Live").child(gameModel.getGameID()).setValue(gameModel);
@@ -426,6 +444,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
             if (timer != null) {
                 timer.cancel();
             }
+            checkVibration();
             new AwesomeInfoDialog(PlayGameActivity.this)
                     .setDialogIconOnly(R.drawable.star)
                     .setColoredCircle(R.color.colorBackground)
@@ -440,7 +459,12 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
                     .setNegativeButtonTextColor(R.color.colorWhite)
                     .setNegativeButtonbackgroundColor(R.color.colorPrimary)
                     .setNegativeButtonClick(this::finish).show();
+
+            if (Config.IS_LOGIN) {
+                updateLeaderBoard();
+            }
         } else {
+            checkVibration();
             new AwesomeInfoDialog(PlayGameActivity.this)
                     .setDialogIconOnly(R.drawable.star)
                     .setColoredCircle(R.color.colorBackground)
@@ -456,6 +480,38 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
                     .setNegativeButtonbackgroundColor(R.color.colorPrimary)
                     .setNegativeButtonClick(this::finish).show();
         }
+    }
+
+    private void updateLeaderBoard() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("leaderboard")
+                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        LeaderBoard leaderBoard = new LeaderBoard(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), gameLevel.getNumber());
+                        if (snapshot.exists()) {
+                            int score = snapshot.getValue(LeaderBoard.class).getScore();
+                            if (score < gameLevel.getNumber()) {
+                                reference.setValue(leaderBoard).addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(PlayGameActivity.this, "Leaderboard updated", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } else {
+                            reference.setValue(leaderBoard).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(PlayGameActivity.this, "Leaderboard updated", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private boolean isGameComplete() {
@@ -553,5 +609,16 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         int selectedItemRight = selectedItemLeft + tileSize;
         int selectedItemBottom = selectedItemTop + tileSize;
         return new RectF(selectedItemLeft, selectedItemTop, selectedItemRight, selectedItemBottom);
+    }
+
+    private void checkVibration() {
+        if (puzzlePreference.isVibrationEnabled()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                vibrator.vibrate(500);
+            }
+        }
     }
 }

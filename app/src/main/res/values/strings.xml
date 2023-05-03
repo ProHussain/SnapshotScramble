@@ -1,35 +1,11 @@
 <resources>
     <string name="app_name">Snapshot Scramble</string>
-    <string name="splash_logo_description">a few second animation</string>
-    <string name="app_version">Version 1.0.0</string>
     <string name="version_number">Version 1.0.0</string>
-    <string name="new_game">New Game</string>
-    <string name="difficulty">Difficulty</string>
-    <string name="select_difficulty">Select Difficulty</string>
-    <string name="best_score">Best Score</string>
-    <string name="play">Play Game</string>
-    <string name="settings">Setting</string>
-    <string name="leaderboard">Leaderboard</string>
-    <string name="exit">Exit</string>
-    <string name="help">Help</string>
-    <string name="resume">Resume</string>
-    <string name="play_online">Play Online</string>
-    <string name="play_offline">Play Offline</string>
-    <string name="start_a_new_game">Start a new Game</string>
-    <string name="select_your_image">Select your Image</string>
-    <string name="hard">Hard</string>
-    <string name="medium">Medium</string>
-    <string name="easy">Easy</string>
-    <string name="join_a_game">Join A Game</string>
     <string name="your_game_id_is">Your Game ID is</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="start_game">Start Game</string>
     <string name="game_id">Game ID.....</string>
-    <string name="login_with_google">Login with Google</string>
-    <string name="google_logo_dec">google_logo</string>
-    <string name="logout">Logout</string>
-    <string name="login_required">Login Required</string>
     <string name="my_account">My Account</string>
 
     <string name="share_app">Share App with Friends and Family</string>
@@ -37,4 +13,7 @@
     <string name="view_more_apps">View More Apps developed by us</string>
     <string name="send_feedback">Share your feedback to improve our app</string>
     <string name="privacy_policy">Visit our Privacy Policy</string>
+    <string name="developer_email">info@hashmac.com</string>
+    <string name="developer_name">HashMac</string>
+    <string name="developer_id">theHashMac</string>
 </resources>

@@ -14,10 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
-import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,9 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hashmac.snapshotscramble.R;
-import com.hashmac.snapshotscramble.Utils.Config;
-import com.hashmac.snapshotscramble.Utils.FirebaseAuthHelper;
-import com.hashmac.snapshotscramble.Utils.PuzzlePreference;
+import com.hashmac.snapshotscramble.utils.Config;
+import com.hashmac.snapshotscramble.utils.FirebaseAuthHelper;
+import com.hashmac.snapshotscramble.utils.PuzzlePreference;
 import com.hashmac.snapshotscramble.adapter.GameLevelAdapter;
 import com.hashmac.snapshotscramble.databinding.ActivityMainBinding;
 import com.hashmac.snapshotscramble.databinding.DialogCreateOnlineGameBinding;
@@ -85,6 +83,20 @@ public class MainActivity extends BaseActivity {
         binding.btnChallenge.setOnClickListener(v -> challengeFriend());
         binding.btnInfo.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, HelpActivity.class)));
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Config.stopMusic(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.rvGameLevel.setAdapter(new GameLevelAdapter(puzzlePreference.getCurrentLevel()));
+        Config.checkMusic(this);
+    }
+
 
     private void challengeFriend() {
         if (Config.IS_LOGIN) {
@@ -228,11 +240,7 @@ public class MainActivity extends BaseActivity {
         authHelper.signInWithGoogle(this,SIGN_IN_CODE);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        binding.rvGameLevel.setAdapter(new GameLevelAdapter(puzzlePreference.getCurrentLevel()));
-    }
+
 
     private void playGame() {
         new AwesomeInfoDialog(MainActivity.this)
