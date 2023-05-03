@@ -1,7 +1,7 @@
 package com.hashmac.snapshotscramble.ui;
 
-import static com.hashmac.snapshotscramble.Utils.Config.PROGRESS_INTERVAL;
-import static com.hashmac.snapshotscramble.Utils.Config.SPLASH_DURATION;
+import static com.hashmac.snapshotscramble.utils.Config.PROGRESS_INTERVAL;
+import static com.hashmac.snapshotscramble.utils.Config.SPLASH_DURATION;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hashmac.snapshotscramble.Utils.Config;
+import com.hashmac.snapshotscramble.utils.Config;
 import com.hashmac.snapshotscramble.databinding.ActivitySplashBinding;
 
 /**

@@ -18,7 +18,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Personalization"
@@ -112,7 +111,6 @@
                     android:background="@color/colorAccent" />
 
                 <ImageView
-                    android:id="@+id/img_vibration"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:padding="9dp"
@@ -126,6 +124,48 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="Vibration Effect enabled"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutLeaderBoard"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="9dp"
+                    android:src="@drawable/ic_leaderboard"
+                    app:tint="@color/colorAccent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Check Leaderboard"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
 
@@ -149,9 +189,9 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayoutShare"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:id="@+id/linearLayoutShare"
                 android:background="@drawable/selector_effect"
                 android:clickable="true"
                 android:focusable="true"
@@ -191,12 +231,12 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayoutRate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/selector_effect"
                 android:clickable="true"
                 android:focusable="true"
+                android:id="@+id/linearLayoutRate"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -233,11 +273,11 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayoutApps"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/selector_effect"
                 android:clickable="true"
+                android:id="@+id/linearLayoutMoreApps"
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -275,12 +315,12 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayoutFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/selector_effect"
                 android:clickable="true"
                 android:focusable="true"
+                android:id="@+id/linearLayoutFeedback"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -317,11 +357,11 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayoutPrivacy"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/selector_effect"
                 android:clickable="true"
+                android:id="@+id/linearLayoutPrivacyPolicy"
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">

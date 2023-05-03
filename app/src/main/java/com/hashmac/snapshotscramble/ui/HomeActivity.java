@@ -17,8 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.hashmac.snapshotscramble.databinding.ActivityHomeBinding;
 import com.hashmac.snapshotscramble.models.User;
 import com.hashmac.snapshotscramble.R;
-import com.hashmac.snapshotscramble.Utils.Config;
-import com.hashmac.snapshotscramble.Utils.FirebaseAuthHelper;
+import com.hashmac.snapshotscramble.utils.Config;
+import com.hashmac.snapshotscramble.utils.FirebaseAuthHelper;
 
 import java.util.Objects;
 
@@ -147,6 +147,18 @@ public class HomeActivity extends BaseActivity {
         } else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Config.stopMusic(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Config.checkMusic(this);
     }
 
     @Override
