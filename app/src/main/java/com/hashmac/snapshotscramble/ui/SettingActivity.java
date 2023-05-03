@@ -1,27 +1,18 @@
 package com.hashmac.snapshotscramble.ui;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.hashmac.snapshotscramble.R;
 import com.hashmac.snapshotscramble.Utils.Config;
 import com.hashmac.snapshotscramble.Utils.FirebaseAuthHelper;
 import com.hashmac.snapshotscramble.Utils.PuzzlePreference;
 import com.hashmac.snapshotscramble.databinding.ActivitySettingBinding;
 import com.hashmac.snapshotscramble.databinding.DialogDifficultiesBinding;
-
-import java.util.Objects;
 
 public class SettingActivity extends AppCompatActivity {
     ActivitySettingBinding binding;
@@ -30,82 +21,53 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySettingBbinding.inflate(getLayoutInflater());
+        binding = ActivitySettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
     }
 
     private void init() {
         puzzlePreference = new PuzzlePreference(this);
-        binding.backBtnImage.setOnClickListener(view -> finish());
-        LoadSettings();
+        binding.imgBack.setOnClickListener(view -> finish());
+        loadSettings();
 
-
-        binding.soundSwitch.setOnClickListener(view -> ChangeSoundSetting());
-
-        binding.vibrationSwitch.setOnClickListener(view -> ChangeVibrationSetting());
+        binding.linearLayoutSound.setOnClickListener(view -> changeSoundSetting());
+        binding.linearLayoutVibration.setOnClickListener(view -> changeVibrationSetting());
 
     }
     
 
-    private void ChangeVibrationSetting() {
+    private void changeVibrationSetting() {
         boolean vibration = puzzlePreference.isVibrationEnabled();
-        puzzlePreference.setSoundEnabled(!vibration);
+        puzzlePreference.setVibrationEnabled(!vibration);
+        loadSettings();
     }
 
-    private void ChangeSoundSetting() {
+    private void changeSoundSetting() {
         boolean sound = puzzlePreference.isSoundEnabled();
         puzzlePreference.setSoundEnabled(!sound);
+        loadSettings();
     }
 
-    private void LoadSettings() {
-        binding.soundSwitch.setChecked(puzzlePreference.isSoundEnabled());
-        binding.vibrationSwitch.setChecked(puzzlePreference.isVibrationEnabled());
-        binding.tvDifficulties.setText("Easy");
-        if (Config.IS_LOGIN) {
-            binding.btnLogout.setVisibility(View.VISIBLE);
-            binding.btnLoginGoogle.setVisibility(View.GONE);
-            binding.tvUserId.setText(FirebaseAuth.getInstance().getUid());
+    private void loadSettings() {
+        if (puzzlePreference.isSoundEnabled()) {
+            binding.imgSound.setImageResource(R.drawable.ic_sound);
+            binding.txtSound.setText("Music effect is enabled");
         } else {
-            binding.btnLogout.setVisibility(View.GONE);
-            binding.btnLoginGoogle.setVisibility(View.VISIBLE);
-            binding.tvUserId.setText(getString(R.string.login_required));
+            binding.imgSound.setImageResource(R.drawable.ic_no_sound);
+            binding.txtSound.setText("Music effect is disabled");
         }
-    }
 
-    private void ShowDifficultiesDialog() {
-        DialogDifficultiesBinding difficultiesBinding = DialogDifficultiesBinding.inflate(getLayoutInflater());
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(difficultiesBinding.getRoot());
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        if (puzzlePreference.isVibrationEnabled()) {
+            binding.txtVibration.setText("Vibration is enabled");
+        } else {
+            binding.txtVibration.setText("Vibration is disabled");
+        }
 
-        difficultiesBinding.difficultyEasy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeDifficulty("Easy");
-                dialog.dismiss();
-            }
-        });
-
-        difficultiesBinding.difficultyMedium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeDifficulty("Medium");
-                dialog.dismiss();
-            }
-        });
-
-        difficultiesBinding.difficultyHard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeDifficulty("Hard");
-                dialog.dismiss();
-            }
-        });
-    }
-
-    private void ChangeDifficulty(String level) {
-        LoadSettings();
+        if (Config.IS_LOGIN) {
+            binding.btnSignout.setVisibility(View.VISIBLE);
+        } else {
+            binding.btnSignout.setVisibility(View.GONE);
+        }
     }
 }

@@ -83,6 +83,7 @@ public class MainActivity extends BaseActivity {
         puzzlePreference = new PuzzlePreference(this);
         binding.btnPlay.setOnClickListener(v -> playGame());
         binding.btnChallenge.setOnClickListener(v -> challengeFriend());
+        binding.btnInfo.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, HelpActivity.class)));
     }
 
     private void challengeFriend() {

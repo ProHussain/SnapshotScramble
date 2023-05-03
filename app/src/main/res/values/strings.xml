@@ -31,4 +31,10 @@
     <string name="logout">Logout</string>
     <string name="login_required">Login Required</string>
     <string name="my_account">My Account</string>
+
+    <string name="share_app">Share App with Friends and Family</string>
+    <string name="rate_app">Rate us on Play Store</string>
+    <string name="view_more_apps">View More Apps developed by us</string>
+    <string name="send_feedback">Share your feedback to improve our app</string>
+    <string name="privacy_policy">Visit our Privacy Policy</string>
 </resources>
