@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "628018556539-3t7nr4hma8epbhmq4mhq9us41qru4e4b.apps.googleusercontent.com",
+          "client_id": "628018556539-5cag7gub0tnpcemm38cv1foh9fn04lk2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.hashmac.snapshotscramble",
-            "certificate_hash": "29f43cc84c84c62e5d0ddfa2df4cb909f9461a06"
+            "certificate_hash": "ace675a701f4145463204665c66a536c06280b6e"
           }
         },
         {

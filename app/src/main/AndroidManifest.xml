@@ -10,6 +10,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
+        android:name=".AppControler"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,27 +24,33 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".UI.SettingActivity"
+            android:screenOrientation="portrait"
+            android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.HelpActivity"
+            android:screenOrientation="portrait"
+            android:name=".ui.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.LeaderBoardActivity"
+            android:screenOrientation="portrait"
+            android:name=".ui.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.PlayGameActivity"
-            android:exported="false"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="portrait"
+            android:name=".ui.HelpActivity"
+            android:exported="false" />
         <activity
-            android:name=".UI.MainActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:screenOrientation="portrait"
+            android:name=".ui.LeaderBoardActivity"
+            android:exported="false" />
         <activity
-            android:name=".UI.SplashActivity"
+            android:screenOrientation="portrait"
+            android:name=".ui.PlayGameActivity"
+            android:launchMode="singleInstance"
+            android:exported="false" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

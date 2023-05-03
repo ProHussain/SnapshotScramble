@@ -30,4 +30,5 @@
     <string name="google_logo_dec">google_logo</string>
     <string name="logout">Logout</string>
     <string name="login_required">Login Required</string>
+    <string name="my_account">My Account</string>
 </resources>

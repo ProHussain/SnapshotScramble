@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    app:cardElevation="3dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:textColor="@color/colorText"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:gravity="center_horizontal"
-        android:text="@string/your_game_id_is"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/tv_game_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:textColor="@color/colorText"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:hint="@string/game_id"
-        android:padding="8dp"
-        android:background="@drawable/edittext_background"
-        android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginVertical="8dp"
+            android:gravity="center_horizontal"
+            android:text="@string/your_game_id_is"
+            android:textColor="@color/colorText"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/start_game_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/start_game"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/colorText"
-        android:layout_marginHorizontal="48dp"
-        android:background="@drawable/button_background"
-        android:layout_marginVertical="8dp"
-        style="?android:attr/buttonBarButtonStyle" />
+        <EditText
+            android:id="@+id/tv_game_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/edittext_background"
+            android:gravity="center_horizontal"
+            android:hint="@string/game_id"
+            android:padding="8dp"
+            android:textColor="@color/colorText"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/start_game_btn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/background_button"
+            android:paddingHorizontal="16dp"
+            android:text="@string/start_game"
+            android:textColor="@color/colorText" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

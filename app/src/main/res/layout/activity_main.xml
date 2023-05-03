@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/button_container"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/background"
+    tools:context=".ui.MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_game_Level"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="56dp"
+        android:clipToPadding="false"
+        android:paddingBottom="124dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <ImageView
-        android:id="@+id/logo_image"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginBottom="32dp"
-        android:src="@mipmap/ic_launcher" />
+        android:id="@+id/btn_info"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp"
+        android:src="@drawable/info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/play_button"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/button_background"
-        android:textColor="@color/colorText"
-        android:text="@string/play" />
+        android:layout_height="120dp"
+        android:background="@drawable/background_top_round"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Button
-        android:id="@+id/setting_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/button_background"
-        android:text="@string/settings"
-        android:textColor="@color/colorText" />
+        <ImageView
+            android:id="@+id/btn_play"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/play" />
 
-    <Button
-        android:id="@+id/leaderboard_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/button_background"
-        android:text="@string/leaderboard"
-        android:textColor="@color/colorText" />
+        <Button
+            android:id="@+id/btn_challenge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/background_button"
+            android:text="Challenge your friends"
+            android:textColor="@color/colorWhite" />
 
-    <Button
-        android:id="@+id/shop_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/button_background"
-        android:text="@string/help"
-        android:textColor="@color/colorText" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/exit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/button_background"
-        android:text="@string/exit"
-        android:textColor="@color/colorText" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

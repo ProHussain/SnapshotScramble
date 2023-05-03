@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorBackground"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".UI.PlayGameActivity">
+    tools:context=".ui.PlayGameActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -15,37 +15,45 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:padding="16dp"
+        android:background="@color/transperentBG"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/gameType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Steps : "
-            android:textColor="@color/colorAccent"
-            android:textSize="21sp" />
+            android:textColor="@color/colorBlack"
+            android:textSize="21sp"
+            android:text="Moves : "
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/puzzleStepCounts"
+            android:id="@+id/gameTarget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorBlack"
             android:textSize="21sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:layout_weight="1">
+        app:layout_constraintBottom_toTopOf="@+id/view_original_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <RelativeLayout
             android:id="@+id/puzzleFullBoardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorText"
+            android:background="@color/colorBackground"
             android:orientation="horizontal">
 
         </RelativeLayout>
@@ -55,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -66,8 +74,18 @@
         android:layout_height="72dp"
         android:layout_gravity="end"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/btn_pause"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pause" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

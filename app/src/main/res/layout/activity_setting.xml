@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".UI.LeaderBoardActivity">
+    tools:context=".ui.LeaderBoardActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -150,7 +150,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
+        android:background="@drawable/background_button"
         android:text="@string/logout"
         android:paddingHorizontal="48dp"
         android:layout_gravity="center_horizontal"

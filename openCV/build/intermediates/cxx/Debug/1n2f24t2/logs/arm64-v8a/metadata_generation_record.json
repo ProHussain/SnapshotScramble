@@ -2,7 +2,7 @@
   {
     "level_": 0,
     "message_": "Start JSON generation. Platform version: 21 min SDK version: arm64-v8a",
-    "file_": "C:\\Users\\hus98\\AndroidStudioProjects\\Snapshot Scramble\\openCV\\libcxx_helper\\CMakeLists.txt",
+    "file_": "C:\\Users\\Hussain\\AndroidStudioProjects\\SnapshotScramble\\openCV\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|arm64-v8a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -11,12 +11,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -880244295
+    "memoizedHashCode": -688936369
   },
   {
     "level_": 0,
-    "message_": "JSON \u0027C:\\Users\\hus98\\AndroidStudioProjects\\Snapshot Scramble\\openCV\\.cxx\\Debug\\1n2f24t2\\arm64-v8a\\android_gradle_build.json\u0027 was up-to-date",
-    "file_": "C:\\Users\\hus98\\AndroidStudioProjects\\Snapshot Scramble\\openCV\\libcxx_helper\\CMakeLists.txt",
+    "message_": "JSON \u0027C:\\Users\\Hussain\\AndroidStudioProjects\\SnapshotScramble\\openCV\\.cxx\\Debug\\1n2f24t2\\arm64-v8a\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "C:\\Users\\Hussain\\AndroidStudioProjects\\SnapshotScramble\\openCV\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|arm64-v8a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -25,12 +25,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 360584812
+    "memoizedHashCode": -316026478
   },
   {
     "level_": 0,
     "message_": "JSON generation completed without problems",
-    "file_": "C:\\Users\\hus98\\AndroidStudioProjects\\Snapshot Scramble\\openCV\\libcxx_helper\\CMakeLists.txt",
+    "file_": "C:\\Users\\Hussain\\AndroidStudioProjects\\SnapshotScramble\\openCV\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|arm64-v8a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -39,6 +39,6 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 222461784
+    "memoizedHashCode": 413769710
   }
 ]

@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.hashmac.snapshotscramble.R;
-import com.hashmac.snapshotscramble.UI.PlayGameActivity;
+import com.hashmac.snapshotscramble.ui.PlayGameActivity;
 
 public class TileItem extends androidx.appcompat.widget.AppCompatImageView {
     private Position startingPosition;

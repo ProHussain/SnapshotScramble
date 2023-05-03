@@ -10,7 +10,7 @@
         android:id="@+id/create_game_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
+        android:background="@drawable/background_button"
         android:layout_marginHorizontal="48dp"
         android:layout_marginVertical="8dp"
         android:textColor="@color/colorText"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/join_a_game"
         android:textColor="@color/colorText"
-        android:background="@drawable/button_background"
+        android:background="@drawable/background_button"
         android:layout_marginHorizontal="48dp"
         android:layout_marginVertical="8dp"/>
 
