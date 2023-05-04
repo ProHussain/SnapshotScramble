@@ -1,8 +1,0 @@
-
-h	java:S112¦"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ª¡õüı0
-x
-java:S1192¬"UDefine a constant instead of duplicating this literal "Something went wrong" 4 times.(Ç‹œ­ıÿÿÿÿ8¬¡õüı0
-T
-java:S1874 "1Remove this use of "getBitmap"; it is deprecated.(ó‰ßÎÿÿÿÿÿ8Û¢õüı0
-r
-java:S1215æ"TDon't try to be smarter than the JVM, remove this call to run the garbage collector.(Ì°¬“8ë¢õüı0

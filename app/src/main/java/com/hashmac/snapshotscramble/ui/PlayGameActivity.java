@@ -20,8 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -116,13 +114,13 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
 
         new AwesomeInfoDialog(PlayGameActivity.this)
                 .setDialogIconOnly(R.drawable.pause)
-                .setColoredCircle(R.color.colorBackground)
+                .setColoredCircle(R.color.colorPrimaryLight)
                 .setTitle("Game Paused")
                 .setMessage("Do you want to resume the game?")
                 .setCancelable(false)
                 .setPositiveButtonText("Resume")
                 .setPositiveButtonTextColor(R.color.colorWhite)
-                .setPositiveButtonbackgroundColor(R.color.colorPrimaryDark)
+                .setPositiveButtonbackgroundColor(R.color.colorPrimary)
                 .setPositiveButtonClick(() -> {
                     if (game.equals("level")) {
                         if (gameLevel.getType() == GameLevel.TYPE_TIME) {
@@ -142,7 +140,24 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
             case "level":
                 int level = getIntent().getIntExtra("Level", 1);
                 gameLevel = GameLevel.getGameLevel(level);
-                Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.puzzle_image);
+                Bitmap image = null;
+                switch (gameLevel.getImage()) {
+                    case 0:
+                        image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.puzzle_image);
+                        break;
+                    case 1:
+                        image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.puzzle_image_one);
+                        break;
+                    case 2:
+                        image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.puzzle_image_two);
+                        break;
+                    case 3:
+                        image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.puzzle_image_three);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + gameLevel.getImage());
+                }
+
                 if (gameLevel.getType() == GameLevel.TYPE_MOVE) {
                     startNewMoveGame(image, gameLevel);
                 } else {
@@ -167,7 +182,6 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
     }
 
     private void startCounter(int target) {
-        target = 5;
         binding.gameType.setText("Time : ");
         timer = new CountDownTimer(target * 1000L, 1000) {
             @Override
@@ -188,13 +202,13 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         checkVibration();
         new AwesomeInfoDialog(PlayGameActivity.this)
                 .setDialogIconOnly(R.drawable.dislike)
-                .setColoredCircle(R.color.colorBackground)
+                .setColoredCircle(R.color.colorPrimaryLight)
                 .setTitle("Game Over")
                 .setMessage("You have failed to complete the puzzle in required " + message)
                 .setCancelable(false)
                 .setPositiveButtonText("Restart")
                 .setPositiveButtonTextColor(R.color.colorWhite)
-                .setPositiveButtonbackgroundColor(R.color.colorPrimaryDark)
+                .setPositiveButtonbackgroundColor(R.color.colorPrimary)
                 .setPositiveButtonClick(() -> init())
                 .setNegativeButtonText("Exit")
                 .setNegativeButtonTextColor(R.color.colorWhite)
@@ -214,7 +228,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
 
         AwesomeInfoDialog dialog = new AwesomeInfoDialog(PlayGameActivity.this)
                 .setDialogIconOnly(R.drawable.flag)
-                .setColoredCircle(R.color.colorBackground)
+                .setColoredCircle(R.color.colorPrimaryLight)
                 .setTitle("Waiting for opponent")
                 .setMessage("Please wait while we connect you to your opponent")
                 .setCancelable(false);
@@ -256,7 +270,7 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         }
         new AwesomeInfoDialog(PlayGameActivity.this)
                 .setDialogIconOnly(R.drawable.flag)
-                .setColoredCircle(R.color.colorBackground)
+                .setColoredCircle(R.color.colorPrimaryLight)
                 .setTitle("Game Over")
                 .setMessage(winMessage)
                 .setCancelable(false)
@@ -447,13 +461,13 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
             checkVibration();
             new AwesomeInfoDialog(PlayGameActivity.this)
                     .setDialogIconOnly(R.drawable.star)
-                    .setColoredCircle(R.color.colorBackground)
+                    .setColoredCircle(R.color.colorPrimaryLight)
                     .setTitle("Congratulations")
                     .setMessage("You have completed this level successfully.")
                     .setCancelable(false)
                     .setPositiveButtonText("Next Level")
                     .setPositiveButtonTextColor(R.color.colorWhite)
-                    .setPositiveButtonbackgroundColor(R.color.colorPrimaryDark)
+                    .setPositiveButtonbackgroundColor(R.color.colorPrimary)
                     .setPositiveButtonClick(this::init)
                     .setNegativeButtonText("Exit")
                     .setNegativeButtonTextColor(R.color.colorWhite)
@@ -467,13 +481,13 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
             checkVibration();
             new AwesomeInfoDialog(PlayGameActivity.this)
                     .setDialogIconOnly(R.drawable.star)
-                    .setColoredCircle(R.color.colorBackground)
+                    .setColoredCircle(R.color.colorPrimaryLight)
                     .setTitle("Congratulations")
                     .setMessage("You have completed this level successfully.")
                     .setCancelable(false)
                     .setPositiveButtonText("Play Again")
                     .setPositiveButtonTextColor(R.color.colorWhite)
-                    .setPositiveButtonbackgroundColor(R.color.colorPrimaryDark)
+                    .setPositiveButtonbackgroundColor(R.color.colorPrimary)
                     .setPositiveButtonClick(this::init)
                     .setNegativeButtonText("Exit")
                     .setNegativeButtonTextColor(R.color.colorWhite)
@@ -486,32 +500,32 @@ public class PlayGameActivity extends BaseActivity implements View.OnTouchListen
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("leaderboard")
                 .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        LeaderBoard leaderBoard = new LeaderBoard(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), gameLevel.getNumber());
-                        if (snapshot.exists()) {
-                            int score = snapshot.getValue(LeaderBoard.class).getScore();
-                            if (score < gameLevel.getNumber()) {
-                                reference.setValue(leaderBoard).addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(PlayGameActivity.this, "Leaderboard updated", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                LeaderBoard leaderBoard = new LeaderBoard(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), gameLevel.getNumber());
+                if (snapshot.exists()) {
+                    int score = snapshot.getValue(LeaderBoard.class).getScore();
+                    if (score < gameLevel.getNumber()) {
+                        reference.setValue(leaderBoard).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(PlayGameActivity.this, "Leaderboard updated", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            reference.setValue(leaderBoard).addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(PlayGameActivity.this, "Leaderboard updated", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                        });
+                    }
+                } else {
+                    reference.setValue(leaderBoard).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(PlayGameActivity.this, "Leaderboard updated", Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    });
+                }
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+            }
+        });
     }
 
     private boolean isGameComplete() {

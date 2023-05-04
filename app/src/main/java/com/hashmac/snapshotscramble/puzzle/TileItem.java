@@ -84,7 +84,7 @@ public class TileItem extends androidx.appcompat.widget.AppCompatImageView {
 
     public void setImage(Bitmap image) {
         if(image == null) {
-            setBackgroundColor(getContext().getResources().getColor(R.color.colorBackground));
+            setBackgroundColor(getContext().getResources().getColor(R.color.colorPrimaryLight));
             setAlpha(0);
             isBlank = true;
         } else {

@@ -33,14 +33,24 @@ public class GameLevel {
     public static void setGameLevels() {
         gameLevels.add(new GameLevel(1, 0, TYPE_TIME, 300, "Level 1"));
         gameLevels.add(new GameLevel(2, 0, TYPE_MOVE, 200, "Level 2"));
-        gameLevels.add(new GameLevel(3, 0, TYPE_TIME, 50, "Level 3"));
-        gameLevels.add(new GameLevel(4, 0, TYPE_MOVE, 50, "Level 4"));
-        gameLevels.add(new GameLevel(5, 0, TYPE_TIME, 40, "Level 5"));
-        gameLevels.add(new GameLevel(6, 0, TYPE_MOVE, 40, "Level 6"));
-        gameLevels.add(new GameLevel(7, 0, TYPE_TIME, 30, "Level 7"));
-        gameLevels.add(new GameLevel(8, 0, TYPE_MOVE, 30, "Level 8"));
-        gameLevels.add(new GameLevel(9, 0, TYPE_TIME, 20, "Level 9"));
-        gameLevels.add(new GameLevel(10, 0, TYPE_MOVE, 20, "Level 10"));
+        gameLevels.add(new GameLevel(3, 0, TYPE_TIME, 250, "Level 3"));
+        gameLevels.add(new GameLevel(4, 0, TYPE_MOVE, 180, "Level 4"));
+        gameLevels.add(new GameLevel(5, 0, TYPE_TIME, 200, "Level 5"));
+        gameLevels.add(new GameLevel(6, 0, TYPE_MOVE, 160, "Level 6"));
+        gameLevels.add(new GameLevel(7, 1, TYPE_TIME, 170, "Level 7"));
+        gameLevels.add(new GameLevel(8, 1, TYPE_MOVE, 140, "Level 8"));
+        gameLevels.add(new GameLevel(9, 1, TYPE_TIME, 150, "Level 9"));
+        gameLevels.add(new GameLevel(10, 1, TYPE_MOVE, 120, "Level 10"));
+        gameLevels.add(new GameLevel(11, 1, TYPE_TIME, 130, "Level 11"));
+        gameLevels.add(new GameLevel(12, 1, TYPE_MOVE, 100, "Level 12"));
+        gameLevels.add(new GameLevel(13, 2, TYPE_TIME, 110, "Level 13"));
+        gameLevels.add(new GameLevel(14, 2, TYPE_MOVE, 100, "Level 14"));
+        gameLevels.add(new GameLevel(15, 2, TYPE_TIME, 100, "Level 15"));
+        gameLevels.add(new GameLevel(16, 2, TYPE_MOVE, 120, "Level 16"));
+        gameLevels.add(new GameLevel(17, 2, TYPE_TIME, 120, "Level 17"));
+        gameLevels.add(new GameLevel(18, 2, TYPE_MOVE, 140, "Level 18"));
+        gameLevels.add(new GameLevel(19, 3, TYPE_TIME, 140, "Level 19"));
+        gameLevels.add(new GameLevel(20, 3, TYPE_MOVE, 160, "Level 20"));
     }
 
     public static List<GameLevel> getGameLevels() {

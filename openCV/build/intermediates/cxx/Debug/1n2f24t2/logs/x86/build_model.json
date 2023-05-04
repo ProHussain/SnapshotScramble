@@ -25,7 +25,10 @@
     "variantName": "debug",
     "isDebuggableEnabled": true,
     "validAbiList": [
-      "X86"
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
     ],
     "buildTargetSet": [
       "opencv_jni_shared"
@@ -126,7 +129,6 @@
         "rootBuildGradleFolder": "C:\\Users\\Hussain\\AndroidStudioProjects\\SnapshotScramble",
         "sdkFolder": "C:\\Users\\Hussain\\AppData\\Local\\Android\\Sdk",
         "isBuildOnlyTargetAbiEnabled": true,
-        "ideBuildTargetAbi": "x86",
         "isCmakeBuildCohabitationEnabled": false,
         "isPrefabEnabled": false
       },

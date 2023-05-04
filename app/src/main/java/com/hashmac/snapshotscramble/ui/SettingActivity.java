@@ -79,14 +79,14 @@ public class SettingActivity extends BaseActivity {
         new AwesomeInfoDialog(this)
                 .setTitle("Sign out")
                 .setMessage("Are you sure you want to sign out?")
-                .setColoredCircle(R.color.colorBackground)
+                .setColoredCircle(R.color.colorPrimaryLight)
                 .setDialogIconOnly(R.drawable.flag)
                 .setCancelable(true)
                 .setPositiveButtonText("Yes")
                 .setPositiveButtonbackgroundColor(R.color.colorPrimary)
                 .setPositiveButtonTextColor(R.color.colorWhite)
                 .setNegativeButtonText("No")
-                .setNegativeButtonbackgroundColor(R.color.colorPrimaryDark)
+                .setNegativeButtonbackgroundColor(R.color.colorPrimary)
                 .setNegativeButtonTextColor(R.color.colorWhite)
                 .setPositiveButtonClick(() -> {
                     Config.IS_LOGIN = false;

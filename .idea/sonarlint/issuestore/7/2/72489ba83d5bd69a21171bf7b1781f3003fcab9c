@@ -1,0 +1,24 @@
+
+`	java:S112!"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+r
+java:S1104"\Make UPDATE_AVAILABLE a static final constant or non-public and provide accessors if needed.(ˆİÛÆ
+o
+java:S1104"TMake IS_LOGIN a static final constant or non-public and provide accessors if needed.(¡¼Œ»üÿÿÿÿ
+r
+java:S1104"WMake puzzleImage a static final constant or non-public and provide accessors if needed.(©Ä©äşÿÿÿÿ
+k
+java:S1104"PMake user a static final constant or non-public and provide accessors if needed.(´Ù¸ûÿÿÿÿ
+L
+java:S1444"6Make this "public static UPDATE_AVAILABLE" field final(ˆİÛÆ
+I
+java:S1444".Make this "public static IS_LOGIN" field final(¡¼Œ»üÿÿÿÿ
+L
+java:S1444"1Make this "public static puzzleImage" field final(©Ä©äşÿÿÿÿ
+E
+java:S1444"*Make this "public static user" field final(´Ù¸ûÿÿÿÿ
+q
+java:S3008"[Rename this field "UPDATE_AVAILABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆİÛÆ
+n
+java:S3008"SRename this field "IS_LOGIN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡¼Œ»üÿÿÿÿ
+P
+java:S1118":Add a private constructor to hide the implicit public one.(Óùÿ¿

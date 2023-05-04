@@ -166,7 +166,7 @@ public class HomeActivity extends BaseActivity {
         new AwesomeInfoDialog(this)
                 .setTitle("Exit")
                 .setMessage("Do you want to exit?")
-                .setColoredCircle(R.color.colorBackground)
+                .setColoredCircle(R.color.colorPrimaryLight)
                 .setDialogIconOnly(R.drawable.flag)
                 .setCancelable(true)
                 .setPositiveButtonText("Exit")
