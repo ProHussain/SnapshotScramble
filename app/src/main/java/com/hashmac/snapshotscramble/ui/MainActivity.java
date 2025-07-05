@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,9 +39,6 @@ import com.hashmac.snapshotscramble.databinding.DialogCreateOnlineGameBinding;
 import com.hashmac.snapshotscramble.databinding.DialogJoinAGameBinding;
 import com.hashmac.snapshotscramble.models.LiveGameModel;
 import com.hashmac.snapshotscramble.models.User;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
-
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
@@ -283,26 +282,35 @@ public class MainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1, 1)
-                    .start(this);
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri croppedImageUri = result.getUri();
-                try {
-                    Bitmap image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedImageUri);
-                    Config.puzzleImage = convertToCartoonFilter(image,7, 9, 9, 7, 7, 9);
-                    Intent intent = new Intent(MainActivity.this, PlayGameActivity.class);
-                    intent.putExtra("Game", "custom");
-                    startActivity(intent);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            try {
+                Bitmap image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                Config.puzzleImage = convertToCartoonFilter(image,7, 9, 9, 7, 7, 9);
+                Intent intent = new Intent(MainActivity.this, PlayGameActivity.class);
+                intent.putExtra("Game", "custom");
+                startActivity(intent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+//            CropImage.activity(imageUri)
+//                    .setGuidelines(CropImageView.Guidelines.ON)
+//                    .setAspectRatio(1, 1)
+//                    .start(this);
         }
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//            if (resultCode == RESULT_OK) {
+//                Uri croppedImageUri = result.getUri();
+//                try {
+//                    Bitmap image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedImageUri);
+//                    Config.puzzleImage = convertToCartoonFilter(image,7, 9, 9, 7, 7, 9);
+//                    Intent intent = new Intent(MainActivity.this, PlayGameActivity.class);
+//                    intent.putExtra("Game", "custom");
+//                    startActivity(intent);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
         if (requestCode == SIGN_IN_CODE) {
             if (data == null) {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
